@@ -1,9 +1,9 @@
 import * as React from "react";
 import { Box } from "theme-ui";
 
-import UserList from "@/features/users/UserList";
-import UserSearch from "@/features/users/UserSearch";
-import UserTitle from "@/features/users/UserTitle";
+import UsersList from "@/features/users/UsersList";
+import UsersSearch from "@/features/users/UsersSearch";
+import UsersTitle from "@/features/users/UsersTitle";
 
 const Users = () => {
   return (
@@ -12,13 +12,13 @@ const Users = () => {
         display: "flex",
         flexDirection: "column",
         m: "0 auto",
-        width: "20rem",
+        width: "25rem",
         textAlign: "center",
       }}
     >
-      <UserTitle />
-      <UserSearch />
-      <UserList />
+      <UsersTitle />
+      <UsersSearch />
+      <UsersList />
     </Box>
   );
 };

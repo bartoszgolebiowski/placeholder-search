@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 
 import { changeSearch, selectSearch } from "./usersSlice";
 
-const UserSearch = () => {
+const UsersSearch = () => {
   const dispatch = useAppDispatch();
   const search = useAppSelector(selectSearch);
 
@@ -25,4 +25,4 @@ const UserSearch = () => {
   );
 };
 
-export default UserSearch;
+export default UsersSearch;

@@ -1,8 +1,8 @@
 import { Heading } from "@theme-ui/components";
-import React from "react";
+import * as React from "react";
 
-const UserTitle = () => {
+const UsersTitle = () => {
   return <Heading sx={{ mb: 1, fontSize: 6 }}>Users list</Heading>;
 };
 
-export default UserTitle;
+export default UsersTitle;
