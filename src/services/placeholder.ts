@@ -8,8 +8,8 @@ export const placeholderApi = createApi({
     baseUrl: "https://jsonplaceholder.typicode.com/",
   }),
   endpoints: builder => ({
-    getUsers: builder.query<User, null>({
-      query: () => `users/`,
+    getUsers: builder.query<User[], void>({
+      query: () => `users`,
     }),
   }),
 });
