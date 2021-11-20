@@ -26,7 +26,7 @@ const useUsers = () => {
 
   if (data) {
     return {
-      isFiltering,
+      isFiltering: search !== currentFilter ? isFiltering : false,
       data: data.filter(user =>
         user.name.toLowerCase().includes(currentFilter.toLowerCase())
       ),
@@ -35,7 +35,7 @@ const useUsers = () => {
   }
 
   return {
-    isFiltering,
+    isFiltering: false,
     data,
     ...rest,
   } as const;

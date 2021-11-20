@@ -1,6 +1,7 @@
 import {
   render,
   screen,
+  waitFor,
   waitForElementToBeRemoved,
 } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
@@ -75,5 +76,37 @@ describe("Users", () => {
       { timeout: 2000 }
     );
     expect(screen.queryAllByRole("listitem")).toHaveLength(10);
+  });
+
+  it("should display lower quantity of records, when user provide search criteria", async () => {
+    customRender();
+    const input = screen.getByRole("textbox", { name: /search/i });
+    userEvent.type(input, "nn");
+    await waitFor(() =>
+      expect(screen.queryAllByRole("listitem")).toHaveLength(3)
+    );
+  });
+
+  it("should display list with lower opacity, when user provide search criteria", async () => {
+    customRender();
+    const input = screen.getByRole("textbox", { name: /search/i });
+    userEvent.type(input, "nn");
+    await waitFor(() =>
+      expect(screen.getByRole("list")).toHaveStyle({ opacity: "0.6" })
+    );
+    await waitFor(() =>
+      expect(screen.queryAllByRole("listitem")).toHaveLength(3)
+    );
+    expect(screen.getByRole("list")).toHaveStyle({ opacity: "1" });
+  });
+
+  it("should display no record text, when user provide no matching search criteria", async () => {
+    customRender();
+    const input = screen.getByRole("textbox", { name: /search/i });
+    userEvent.type(input, "nnn");
+    const noMatch = await screen.findByText(
+      /No users matching filtering criteria/i
+    );
+    expect(noMatch).toBeInTheDocument();
   });
 });
