@@ -3,18 +3,18 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "@/store/store";
 
 interface UsersState {
-  search: string | null;
+  search: string;
 }
 
 const initialState: UsersState = {
-  search: null,
+  search: "",
 };
 
 export const usersSlice = createSlice({
   name: "users",
   initialState,
   reducers: {
-    changeSearch: (state, action: PayloadAction<string | null>) => {
+    changeSearch: (state, action: PayloadAction<string>) => {
       state.search = action.payload;
     },
   },

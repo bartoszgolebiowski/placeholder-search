@@ -1,45 +1,40 @@
 import { Box } from "@theme-ui/components";
 import * as React from "react";
 
-import { useGetUsersQuery } from "@/services/placeholder";
-
 import Error from "./Error";
 import Loading from "./Loading";
 import NoResult from "./NoResult";
+import useUsers from "./useUser";
 
 const UserList = () => {
-  const { data, error, refetch } = useGetUsersQuery();
+  const { isFiltering, data, isLoading, refetch } = useUsers();
 
-  if (data && data.length > 0) {
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (data) {
+    if (!data.length) {
+      return <NoResult>No users matching filtering criteria</NoResult>;
+    }
+
     return (
       <Box
+        as="ol"
         sx={{
-          display: "flex",
-          flexDirection: "column",
-          m: "0 auto",
-          width: "20rem",
+          textAlign: "start",
+          padding: "0 1rem",
+          opacity: isFiltering ? 0.6 : 1,
         }}
       >
-        <ul>
-          {data.map(user => (
-            <li key={user.id}>
-              {user.name} {user.username}
-            </li>
-          ))}
-        </ul>
+        {data.map(user => (
+          <li key={user.id}>{user.name}</li>
+        ))}
       </Box>
     );
   }
 
-  if (data && data.length === 0) {
-    return <NoResult>No users matching filtering criteria</NoResult>;
-  }
-
-  if (error) {
-    return <Error refetch={refetch}>Oh no, there was an error</Error>;
-  }
-
-  return <Loading />;
+  return <Error refetch={refetch}>Oh no, there was an error</Error>;
 };
 
 export default UserList;
